@@ -5,6 +5,7 @@ import { hash } from "bcryptjs";
 
 import { ComplimentRepository } from "../repositories/ComplimentRepository";
 import { UserRepository } from "../repositories/UserRepository";
+import { classToPlain } from "class-transformer";
 
 interface IUserRequest {
     name: string;
@@ -80,6 +81,14 @@ class UserService {
             });
 
         return token;
+    }
+
+    async listUser() {
+        const repo = getCustomRepository(UserRepository);
+
+        const users = await repo.find();
+
+        return classToPlain(users);
     }
 
     async listUserSendCompliments(user_id: string) {

@@ -24,6 +24,14 @@ class UserController {
         return response.json(token);
     }
 
+    async listUsers(request: Request, response: Response) {
+        const service = new UserService();
+
+        const users = await service.listUser();
+
+        return response.json(users);
+    }
+
     async listUserSendComplimentsController(request: Request, response: Response) {
         const { user_id } = request;
 
