@@ -1,9 +1,9 @@
 import { getCustomRepository } from "typeorm";
-import { TagsRepository } from "../repositories/TagsRepository";
+import { TagRepository } from "../repositories/TagRepository";
 
-class CreateTagService {
-    async execute(name: string) {
-        const tagsRepository = getCustomRepository(TagsRepository);
+class TagService {
+    async createTag(name: string) {
+        const tagsRepository = getCustomRepository(TagRepository);
         if (!name) {
             throw new Error("Incorrect name!");
         }
@@ -24,6 +24,14 @@ class CreateTagService {
         await tagsRepository.save(tag);
         return tag;
     }
+
+    async listTag() {
+        const tagRepository = getCustomRepository(TagRepository);
+
+        const tags = await tagRepository.find();
+
+        return tags;
+    }
 }
 
-export { CreateTagService };
+export { TagService }

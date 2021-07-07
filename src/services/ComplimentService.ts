@@ -2,7 +2,6 @@ import { getCustomRepository } from "typeorm";
 import { ComplimentRepository } from "../repositories/ComplimentRepository";
 import { UserRepository } from "../repositories/UserRepository";
 
-
 interface IComplimentRequest {
     tag_id: string;
     user_sender: string;
@@ -10,8 +9,8 @@ interface IComplimentRequest {
     message: string;
 }
 
-class CreateComplimentService {
-    async execute({ tag_id, user_sender, user_receiver, message }: IComplimentRequest) {
+class ComplimentService {
+    async createCompliment({ tag_id, user_sender, user_receiver, message }: IComplimentRequest) {
         const complimentRepository = getCustomRepository(ComplimentRepository);
         const userRepository = getCustomRepository(UserRepository);
 
@@ -39,4 +38,4 @@ class CreateComplimentService {
     }
 }
 
-export { CreateComplimentService };
+export { ComplimentService };
